@@ -12,7 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Probando JSP</h1>
+        <%@include file="cabecera.jsp" %>
+        <%= dameTitulo("Probando JSP")%>
+                
         <%
          double numero = Math.random();
          if (numero > 0.8){

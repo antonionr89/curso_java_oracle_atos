@@ -12,7 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>tabla del 10</h1>
+        <%@include file="cabecera.jsp" %>
+        <h1 style="color: purple">tabla del 10</h1>
         <%!
         //Declaraciones
         int i,j;
