@@ -13,10 +13,14 @@
     </head>
     <body>
         <h1>tabla del 10</h1>
+        <%!
+        //Declaraciones
+        int i,j;
+        %>
         <%-- Muestra una tabla con sus trs,tds, de la tabla de multiplicar del 7 --%>
-        <% for(int j=0;j<=10;j++){ %>
+        <% for(j=0;j<=10;j++){ %>
         <table style="border-style: double; display: inline-block">
-            <% for(int i=0;i<=10;i++){ %>
+            <% for(i=0;i<=10;i++){ %>
             <tr> 
                 <td> <%= j %> por </td>
                 <td><%= i %></td>
