@@ -37,7 +37,8 @@
                  if(request.getParameter("use") == "" || request.getParameter("pas") == ""){
                      out.println("<p>Ningun campo puede estar vacio</p>");
                  }else{
-                 for(int i=0;i < listaRegistros.getInstance().getArray().size();i++){
+                 //base de datos
+                /* for(int i=0;i < listaRegistros.getInstance().getArray().size();i++){
                      if((request.getParameter("use")+request.getParameter("pas")).equals(listaRegistros.getInstance().getArray().get(i))){
                          out.println("<p>Tu usuario en lista es" +listaRegistros.getInstance().getArray().get(i)+"</p>");
                          out.println("<p>Tu usuario es :"+request.getParameter("use")+"</p>");
@@ -45,8 +46,16 @@
                      }else{
                          out.println("<p>Tu usuario no esta registrado</p>");
                          }
-                    }
-                
+                    }*/
+                 boolean esUser = listaRegistros.getInstance().isUser(request.getParameter("use"),
+                         request.getParameter("use"));
+                         if(esUser == true){
+                         out.println("<p>Tu usuario es :"+request.getParameter("use")+"</p>");
+                         session.setAttribute("nombre", request.getParameter("use"));
+                         }
+                         else{
+                         out.println("<p>Tu usuario no esta registrado</p>");
+                         }
                     }
             }
             }else{

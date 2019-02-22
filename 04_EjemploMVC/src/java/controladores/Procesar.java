@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Persona;
+import modelo.logica.GestionPersona;
 
 /**
  *
@@ -36,8 +37,35 @@ public class Procesar extends HttpServlet {
        String nombre = request.getParameter("nombre");
        String edad = request.getParameter("edad");
        
-       if(nombre.equals("") || edad.equals("") || nombre == null || edad == null){
+      GestionPersona.TipoResultado gestion = GestionPersona.getInstance().guardarPersona(nombre, edad);
+      switch(gestion){
+          case OK:
+          request.getRequestDispatcher("exito.jsp").forward(request, response);
+          request.getSession().setAttribute("persona1", GestionPersona.getInstance().getPersona());
+          break;
+          case SIN_VALORES:
+          request.getRequestDispatcher("errornumero.jsp").forward(request, response);
+          request.getSession().setAttribute("persona1", GestionPersona.getInstance().getPersona());
+          break;
+          case EDAD_MAL:
+          request.getRequestDispatcher("error.jsp").forward(request, response);
+          request.getSession().setAttribute("persona1", GestionPersona.getInstance().getPersona());
+          break;
+          case ERROR_IO:
+          request.getRequestDispatcher("errorio.jsp").forward(request, response);
+          request.getSession().setAttribute("persona1", GestionPersona.getInstance().getPersona());
+      }
+    /*  if(gestion.equals(GestionPersona.TipoResultado.OK)){
+          request.getRequestDispatcher("exito.jsp").forward(request, response);
+      }else if(gestion.equals(GestionPersona.TipoResultado.EDAD_MAL)){
+          request.getRequestDispatcher("errornumero.jsp").forward(request, response);
+      }else{
+          request.getRequestDispatcher(".jsp").forward(request, response);
+      }*/
+       
+      /* if(nombre.equals("") || edad.equals("") || nombre == null || edad == null){
            request.getRequestDispatcher("error.jsp").forward(request, response);
+           
        }else{
            int iEdad = 0;
            try{
@@ -48,7 +76,7 @@ public class Procesar extends HttpServlet {
            Persona p1 = new Persona(nombre, iEdad);
            request.getSession().setAttribute("persona1", p1);
            request.getRequestDispatcher("exito.jsp").forward(request, response);
-       }
+       */
     }
     /**
      * Returns a short description of the servlet.

@@ -6,6 +6,8 @@
 package modelo.logica;
 
 import modelo.Persona;
+import modelo.persistencia.FicheroPersona;
+import modelo.persistencia.JavaJDPersona;
 
 /**
  *
@@ -13,16 +15,28 @@ import modelo.Persona;
  */
 public class GestionPersona {
     
-    private Persona persona;
+    private static GestionPersona instance;
+    private IPersonaDAO daopersona = FicheroPersona.getInstance();
+    private JavaJDPersona javaDB = new JavaJDPersona();
+    private GestionPersona(){
+        
+    }
+    public static GestionPersona getInstance(){
+        if(instance == null) instance = new GestionPersona();
+        return instance;
+    }
     
-    public enum TipoResultado{OK,SIN_VALORES,EDAD_MAL};
+    public enum TipoResultado{OK,SIN_VALORES,EDAD_MAL,ERROR_IO};
     
     public TipoResultado guardarPersona(String nombre,String edad){
         if(validarDatosPersona(nombre, edad)){
             if(validarEdad(edad)){
                 int iEdad = Integer.parseInt(edad);
-                this.persona = new Persona(nombre, iEdad);
+                if(javaDB.guardarPersona(new Persona(nombre, iEdad))){
                 return TipoResultado.OK;
+                }else{
+                    return TipoResultado.ERROR_IO;
+                } 
             }else{
                 return TipoResultado.EDAD_MAL;
             }
@@ -31,14 +45,14 @@ public class GestionPersona {
         }
     }
     public Persona getPersona(){
-        return persona;
+        return javaDB.leerPersona();
     }
     public boolean validarDatosPersona(String nombre,String edad){
-           return nombre.equals("") || edad.equals("");
+           return ! nombre.isEmpty() && ! edad.isEmpty();
     }
     
     public boolean validarEdad(String edad){
-        return edad.matches("^[0-9]+$");
+        return edad.matches("^[1-9][0-9]*$");
 
     }
     

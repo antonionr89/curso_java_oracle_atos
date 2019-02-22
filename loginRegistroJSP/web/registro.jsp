@@ -39,12 +39,12 @@
             if(Integer.parseInt(request.getParameter("eda")) < 18){
                out.println("<p>Eres menor</p>");
                 }else{
-                    listaRegistros.getInstance().getArray().add(request.getParameter("use")+request.getParameter("pas"));
+                    listaRegistros.getInstance().guardarPersona(nombre, Integer.parseInt(edad), user, pass);
                     out.println("Tu usuario es: "+request.getParameter("use")+"<br/>Tu contraseña es: "+request.getParameter("pas")+"<br/>");
-                    for(int i = 0;i < listaRegistros.getInstance().getArray().size();i++){
+                    /*for(int i = 0;i < listaRegistros.getInstance().getArray().size();i++){
                         out.println("los usuarios son: ");
                         out.println(listaRegistros.getInstance().getArray().get(i));
-                    }
+                    }*/
                 }
             }
         %>

@@ -4,7 +4,20 @@
     Author     : USUARIO
 --%>
 
+<%@page import="modelo.Persona"%>
+<%@page import="modelo.logica.GestionPersona"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Persona p = GestionPersona.getInstance().getPersona();
+    String nombre = "";
+    
+    int edad = 0;
+    if(p != null){
+        nombre = p.getNombre();
+        edad = p.getEdad();
+    }
+   
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,8 +27,8 @@
     <body>
         <h1>Ejemplo MVC</h1>
         <form action="procesar.do" method="GET">
-            Nombre: <input id="nombre" type="text" name="nombre"/><br/>
-            Edad: <input id="edad" type="number" name="edad"/><br/>
+            Nombre: <input id="nombre" type="text" name="nombre" value="<%= nombre %>"/><br/>
+            Edad: <input id="edad" type="text" name="edad" value="<%= edad%>"/><br/>
             <input type="submit" value="Enviar datos"/>
         </form>
     </body>
