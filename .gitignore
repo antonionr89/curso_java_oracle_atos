@@ -30,3 +30,5 @@ hs_err_pid*
 /04_EjemploMVC/build/
 /04_EjemploMVC/dist/
 /listadoRegs/nbproject/private/
+/listadoRegs/build/
+/listadoRegs/dist/
