@@ -21,6 +21,10 @@ public class Persona {
         this.user = user;
         this.pass = pass;
     }
+    public Persona(String user,String pass) {
+        this.user = user;
+        this.pass = pass;
+    }
 
     /**
      * Get the value of edad

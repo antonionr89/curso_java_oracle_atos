@@ -1,6 +1,6 @@
 <%-- 
-    Document   : exitoLogin
-    Created on : 22-feb-2019, 14:46:19
+    Document   : exitoMod
+    Created on : 25-feb-2019, 12:13:45
     Author     : USUARIO
 --%>
 <%@page import="modelo.Persona"%>
@@ -10,23 +10,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login con exito</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <%  
+        <h1>Se han modificado tus datos</h1> <%  
             Persona p = (Persona)session.getAttribute("nombre");
             JavaJDPersona db = new JavaJDPersona();
             boolean esUser = db.leerPersonas(request.getParameter("user"),
             request.getParameter("pass"));
-            
-            out.println("<h1>Bienvenido "+p.getNombre());
             out.println("<p>Tu usuario es :"+p.getNombre()+"</p>");
             out.println("<p>Tu edad es :"+p.getEdad()+"</p>");
             //session.setAttribute("nombre", request.getParameter("user"));
            
         %>
         <a href="index.html"><p>Volver</p></a>
-        <a href="modificar.jsp"><p>Modificar datos</p></a>
-        <a href="borrarDatos.jsp"><p>Borrar Datos</p></a>
     </body>
 </html>

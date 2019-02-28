@@ -36,7 +36,7 @@ public class listaRegistros {
     {
       // create a java mysql database connection
       String myDriver = "org.apache.derby.jdbc.ClientDriver";
-      String myUrl = "jdbc:derby://localhost:1527/loginRegistros";
+      String myUrl = "jdbc:derby://localhost:1527/user2 [user2 on USER2]";
       Class.forName(myDriver);
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
       Connection conn = DriverManager.getConnection(myUrl, "user1", "pass");
@@ -64,7 +64,7 @@ public class listaRegistros {
     public boolean isUser(String user,String pass){
       try{
       String myDriver = "org.apache.derby.jdbc.ClientDriver";
-      String myUrl = "jdbc:derby://localhost:1527/loginRegistros";
+      String myUrl = "jdbc:derby://localhost:1527/user2 [user2 on USER2]";
       Class.forName(myDriver);
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
       Connection conn = DriverManager.getConnection(myUrl, "user1", "pass");

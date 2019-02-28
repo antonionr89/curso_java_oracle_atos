@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo.persistencia;
+package com.persistencia;
 
+import com.logica.IRegistrosDAO;
+import com.modelo.Registros;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import modelo.Persona;
-import modelo.logica.IPersonaDAO;
-import org.apache.jasper.tagplugins.jstl.core.Catch;
+
 
 /**
  *
  * @author USUARIO
  */
-public class JavaJDPersona implements IPersonaDAO{
+public class JavaJDPersona implements IRegistrosDAO{
 
     public String getUserDB() {
         return userDB;
@@ -73,23 +73,23 @@ public class JavaJDPersona implements IPersonaDAO{
     
 
     @Override
-    public boolean guardarPersona(Persona persona) {
+    public boolean crear(Registros registro) {
         
         
         try{
       String myDriver = "org.apache.derby.jdbc.ClientDriver";
-      String myUrl = "jdbc:derby://localhost:1527/user2 [user2 on USER2]";
+      String myUrl = "jdbc:derby://localhost:1527/user2";
       Class.forName(myDriver);
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-      Connection conn = DriverManager.getConnection(myUrl, "user1", "pass");
+      Connection conn = DriverManager.getConnection(myUrl, "user2", "pass");
     
       // create the java mysql update preparedstatement
       String query = "INSERT INTO registros VALUES( ? , ? , ? , ? )";
       PreparedStatement stmt = conn.prepareStatement(query);
-      stmt.setString(1, persona.getNombre());
-      stmt.setInt(2, persona.getEdad());
-      stmt.setString(3, persona.getUser());
-      stmt.setString(4, persona.getPass());
+      stmt.setString(3, registro.getNombre());
+      stmt.setInt(2, registro.getEdad());
+      stmt.setInt(1, registro.getId());
+      stmt.setString(4, registro.getPass());
       
       stmt.executeUpdate();
       conn.close();
@@ -99,31 +99,15 @@ public class JavaJDPersona implements IPersonaDAO{
         }          
     }
 
-    @Override
-    public Persona leerPersona() {
-        try(Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/PersonasDB","usuario","pass");){
-            String query = "SELECT nombre,edad FROM persona;";
-            Statement stmt = con.createStatement();
-            ResultSet res = stmt.executeQuery(query);
-            if(res.next()){
-                String nombre = res.getString("nombre");
-                int edad = res.getInt("edad");
-                
-            }
-            return null;
-        }catch(Exception e){
-            return null;
-        }
     
-}
     @Override
     public boolean leerPersonas(String user,String pass){
       try{
       String myDriver = "org.apache.derby.jdbc.ClientDriver";
-      String myUrl = "jdbc:derby://localhost:1527/user2 [user2 on USER2]";
+      String myUrl = "jdbc:derby://localhost:1527/user2";
       Class.forName(myDriver);
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-      Connection conn = DriverManager.getConnection(myUrl, "user1", "pass");
+      Connection conn = DriverManager.getConnection(myUrl, "user2", "pass");
       Statement stmt = conn.createStatement();
       String query = "SELECT * FROM registros";
       ResultSet rs;
@@ -155,10 +139,10 @@ public class JavaJDPersona implements IPersonaDAO{
     public Persona leerP(String user,String pass){
       try{
       String myDriver = "org.apache.derby.jdbc.ClientDriver";
-      String myUrl = "jdbc:derby://localhost:1527/user2 [user2 on USER2]";
+      String myUrl = "jdbc:derby://localhost:1527/user2";
       Class.forName(myDriver);
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-      Connection conn = DriverManager.getConnection(myUrl, "user1", "pass");
+      Connection conn = DriverManager.getConnection(myUrl, "user2", "pass");
       Statement stmt = conn.createStatement();
       String query = "SELECT * FROM registros where usuario = '"+user+"' and pass = '"+pass+"'";
       ResultSet rs;
@@ -188,10 +172,10 @@ public class JavaJDPersona implements IPersonaDAO{
     public Persona modificarDatos(String nombre,int edad,String user,String pass){
        try{
       String myDriver = "org.apache.derby.jdbc.ClientDriver";
-      String myUrl = "jdbc:derby://localhost:1527/user2 [user2 on USER2]";
+      String myUrl = "jdbc:derby://localhost:1527/user2";
       Class.forName(myDriver);
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-      Connection conn = DriverManager.getConnection(myUrl, "user1", "pass");
+      Connection conn = DriverManager.getConnection(myUrl, "user2", "pass");
       String query = "UPDATE registros set nombre = ? , edad = ? , usuario = ? , pass = ? where usuario"
               + " = '"+user+"' and pass = '"+pass+"'";
       PreparedStatement stmt = conn.prepareStatement(query);
@@ -213,10 +197,10 @@ public class JavaJDPersona implements IPersonaDAO{
     public Persona borrarDatos(String user,String pass){
         try{
       String myDriver = "org.apache.derby.jdbc.ClientDriver";
-      String myUrl = "jdbc:derby://localhost:1527/user2 [user2 on USER2]";
+      String myUrl = "jdbc:derby://localhost:1527/user2";
       Class.forName(myDriver);
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-      Connection conn = DriverManager.getConnection(myUrl, "user1", "pass");
+      Connection conn = DriverManager.getConnection(myUrl, "user2", "pass");
       String query = "DELETE FROM registros where usuario"
               + " = '"+user+"' and pass = '"+pass+"'";
       PreparedStatement stmt = conn.prepareStatement(query);

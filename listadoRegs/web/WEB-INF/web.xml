@@ -12,6 +12,14 @@
         <servlet-name>ProcesarLogin</servlet-name>
         <servlet-class>controladores.ProcesarLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>procesarMod</servlet-name>
+        <servlet-class>controladores.procesarMod</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>procesarBor</servlet-name>
+        <servlet-class>controladores.procesarBor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>procesar</servlet-name>
         <url-pattern>/procesar</url-pattern>
@@ -27,6 +35,22 @@
     <servlet-mapping>
         <servlet-name>ProcesarLogin</servlet-name>
         <url-pattern>/procesarLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>procesarMod</servlet-name>
+        <url-pattern>/procesarMod</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>procesarMod</servlet-name>
+        <url-pattern>/procesarMod.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>procesarBor</servlet-name>
+        <url-pattern>/procesarBor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>procesarBor</servlet-name>
+        <url-pattern>/procesarBor.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
